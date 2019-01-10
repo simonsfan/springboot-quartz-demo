@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quartz.cn.springbootquartzdemo.dao.QuartzTaskErrorsMapper">
+    <resultMap id="BaseResultMap" type="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="taskExecuteRecordId" property="taskexecuterecordid" jdbcType="VARCHAR"/>
+        <result column="errorKey" property="errorkey" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createtime" jdbcType="BIGINT"/>
+        <result column="lastModifyTime" property="lastmodifytime" jdbcType="BIGINT"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors"
+               extends="BaseResultMap">
+        <result column="errorValue" property="errorvalue" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, taskExecuteRecordId, errorKey, createTime, lastModifyTime
+  </sql>
+    <sql id="Base_Column_List_With_ErrorValue">
+    id, taskExecuteRecordId, errorKey, errorValue ,createTime, lastModifyTime
+  </sql>
+    <sql id="Blob_Column_List">
+    errorValue
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from quartz_task_errors
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from quartz_task_errors
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors">
+    insert into quartz_task_errors (id, taskExecuteRecordId, errorKey, 
+      createTime, lastModifyTime, errorValue
+      )
+    values (#{id,jdbcType=BIGINT}, #{taskexecuterecordid,jdbcType=VARCHAR}, #{errorkey,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=BIGINT}, #{lastmodifytime,jdbcType=BIGINT}, #{errorvalue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors">
+        insert into quartz_task_errors
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="taskexecuterecordid != null">
+                taskExecuteRecordId,
+            </if>
+            <if test="errorkey != null">
+                errorKey,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="lastmodifytime != null">
+                lastModifyTime,
+            </if>
+            <if test="errorvalue != null">
+                errorValue,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="taskexecuterecordid != null">
+                #{taskexecuterecordid,jdbcType=VARCHAR},
+            </if>
+            <if test="errorkey != null">
+                #{errorkey,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifytime != null">
+                #{lastmodifytime,jdbcType=BIGINT},
+            </if>
+            <if test="errorvalue != null">
+                #{errorvalue,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors">
+        update quartz_task_errors
+        <set>
+            <if test="taskexecuterecordid != null">
+                taskExecuteRecordId = #{taskexecuterecordid,jdbcType=VARCHAR},
+            </if>
+            <if test="errorkey != null">
+                errorKey = #{errorkey,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifytime != null">
+                lastModifyTime = #{lastmodifytime,jdbcType=BIGINT},
+            </if>
+            <if test="errorvalue != null">
+                errorValue = #{errorvalue,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors">
+    update quartz_task_errors
+    set taskExecuteRecordId = #{taskexecuterecordid,jdbcType=VARCHAR},
+      errorKey = #{errorkey,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=BIGINT},
+      lastModifyTime = #{lastmodifytime,jdbcType=BIGINT},
+      errorValue = #{errorvalue,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors">
+    update quartz_task_errors
+    set taskExecuteRecordId = #{taskexecuterecordid,jdbcType=VARCHAR},
+      errorKey = #{errorkey,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=BIGINT},
+      lastModifyTime = #{lastmodifytime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="detailTaskErrors" parameterType="java.lang.String"
+            resultType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskErrors">
+        select
+        <include refid="Base_Column_List_With_ErrorValue"/>
+        from quartz_task_errors where taskExecuteRecordId = #{recordId}
+    </select>
+</mapper>

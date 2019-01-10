@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>微信公众号: 91电影社 登录界面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.min.css}"/>
+
+    <!--<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/supersized.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/loginstyle.css}">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>-->
+    <![endif]-->
+</head>
+<body>
+<div class="page-container">
+    <h1>91电影社 后台管理</h1>
+    <form id="loginaction">
+        <input type="text" name="username" id="username" class="username" placeholder="username">
+        <input type="password" name="passwd" id="passwd" class="password" placeholder="passwd">
+        <button id="sign_in" >Sign me in</button>
+      <!--  <button id="sign_in">Sign me in</button>-->
+        <div class="error"><span>+</span></div>
+    </form>
+    <div class="connect">
+        <p>微信扫一扫:</p><br/>
+        <p>
+            <img style="width:302px;height: 302px;" th:src="@{/img/backgrounds/91movieqrcode.jpg}" alt="" th:title="91电影社"/>
+        </p>
+    </div>
+</div>
+<!-- Javascript -->
+<script type="text/javascript" th:src="@{/js/jquery-1.8.2.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/supersized.3.2.7.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/supersized-init.js}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("#sign_in").on('click', function (e) {
+            e.preventDefault();
+            console.log("===================");
+            $.ajax({
+                beforeSend: function () {
+                    if ($("#username").val() == "" || $("#passwd").val() == "") {
+                        alert("username or passwd is null");
+                        return false;
+                    }
+                },
+                url: "loginasyn?username=" + $("#username").val() + "&passwd=" + $("#passwd").val(),
+                type: "GET",
+                dataType: "json",
+                success: function (result) {
+                    if (!$.isEmptyObject(result)) {
+                        if (result.code == 1000) {
+                            location.href = "/index";
+                        } else {
+                            alert(result["msg"]);
+                        }
+                    } else {
+                        alert("接口返回值为空");
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            })
+        });
+    })
+</script>
+</body>
+</html>
+

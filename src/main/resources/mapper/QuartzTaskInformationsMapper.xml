@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quartz.cn.springbootquartzdemo.dao.QuartzTaskInformationsMapper">
+    <resultMap id="BaseResultMap" type="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="taskNo" property="taskno" jdbcType="VARCHAR"/>
+        <result column="taskName" property="taskname" jdbcType="VARCHAR"/>
+        <result column="schedulerRule" property="schedulerrule" jdbcType="VARCHAR"/>
+        <result column="frozenStatus" property="frozenstatus" jdbcType="VARCHAR"/>
+        <result column="executorNo" property="executorno" jdbcType="VARCHAR"/>
+        <result column="frozenTime" property="frozentime" jdbcType="BIGINT"/>
+        <result column="unfrozenTime" property="unfrozentime" jdbcType="BIGINT"/>
+        <result column="createTime" property="createtime" jdbcType="BIGINT"/>
+        <result column="lastModifyTime" property="lastmodifytime" jdbcType="BIGINT"/>
+        <result column="sendType" property="sendtype" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="executeParamter" property="executeparamter" jdbcType="VARCHAR"/>
+        <result column="timeKey" property="timekey" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, version, taskNo, taskName, schedulerRule, frozenStatus, executorNo, frozenTime, 
+    unfrozenTime, createTime, lastModifyTime, sendType, url, executeParamter, timeKey
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from quartz_task_informations
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from quartz_task_informations
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations">
+    insert into quartz_task_informations (id, version, taskNo, 
+      taskName, schedulerRule, frozenStatus, 
+      executorNo, frozenTime, unfrozenTime, 
+      createTime, lastModifyTime, sendType, 
+      url, executeParamter, timeKey
+      )
+    values (#{id,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{taskno,jdbcType=VARCHAR}, 
+      #{taskname,jdbcType=VARCHAR}, #{schedulerrule,jdbcType=VARCHAR}, #{frozenstatus,jdbcType=VARCHAR}, 
+      #{executorno,jdbcType=VARCHAR}, #{frozentime,jdbcType=BIGINT}, #{unfrozentime,jdbcType=BIGINT}, 
+      #{createtime,jdbcType=BIGINT}, #{lastmodifytime,jdbcType=BIGINT}, #{sendtype,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{executeparamter,jdbcType=VARCHAR}, #{timekey,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations">
+        insert into quartz_task_informations
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="taskno != null">
+                taskNo,
+            </if>
+            <if test="taskname != null">
+                taskName,
+            </if>
+            <if test="schedulerrule != null">
+                schedulerRule,
+            </if>
+            <if test="frozenstatus != null">
+                frozenStatus,
+            </if>
+            <if test="executorno != null">
+                executorNo,
+            </if>
+            <if test="frozentime != null">
+                frozenTime,
+            </if>
+            <if test="unfrozentime != null">
+                unfrozenTime,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="lastmodifytime != null">
+                lastModifyTime,
+            </if>
+            <if test="sendtype != null">
+                sendType,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="executeparamter != null">
+                executeParamter,
+            </if>
+            <if test="timekey != null">
+                timeKey,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="taskno != null">
+                #{taskno,jdbcType=VARCHAR},
+            </if>
+            <if test="taskname != null">
+                #{taskname,jdbcType=VARCHAR},
+            </if>
+            <if test="schedulerrule != null">
+                #{schedulerrule,jdbcType=VARCHAR},
+            </if>
+            <if test="frozenstatus != null">
+                #{frozenstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="executorno != null">
+                #{executorno,jdbcType=VARCHAR},
+            </if>
+            <if test="frozentime != null">
+                #{frozentime,jdbcType=BIGINT},
+            </if>
+            <if test="unfrozentime != null">
+                #{unfrozentime,jdbcType=BIGINT},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifytime != null">
+                #{lastmodifytime,jdbcType=BIGINT},
+            </if>
+            <if test="sendtype != null">
+                #{sendtype,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="executeparamter != null">
+                #{executeparamter,jdbcType=VARCHAR},
+            </if>
+            <if test="timekey != null">
+                #{timekey,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations">
+        update quartz_task_informations
+        <set>
+            <if test="version != null">
+                version = version+1,
+            </if>
+            <if test="taskno != null">
+                taskNo = #{taskno,jdbcType=VARCHAR},
+            </if>
+            <if test="taskname != null">
+                taskName = #{taskname,jdbcType=VARCHAR},
+            </if>
+            <if test="schedulerrule != null">
+                schedulerRule = #{schedulerrule,jdbcType=VARCHAR},
+            </if>
+            <if test="frozenstatus != null">
+                frozenStatus = #{frozenstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="executorno != null">
+                executorNo = #{executorno,jdbcType=VARCHAR},
+            </if>
+            <if test="frozentime != null">
+                frozenTime = #{frozentime,jdbcType=BIGINT},
+            </if>
+            <if test="unfrozentime != null">
+                unfrozenTime = #{unfrozentime,jdbcType=BIGINT},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifytime != null">
+                lastModifyTime = #{lastmodifytime,jdbcType=BIGINT},
+            </if>
+            <if test="sendtype != null">
+                sendType = #{sendtype,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="executeparamter != null">
+                executeParamter = #{executeparamter,jdbcType=VARCHAR},
+            </if>
+            <if test="timekey != null">
+                timeKey = #{timekey,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT} and version = #{version}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations">
+    update quartz_task_informations
+    set version = #{version,jdbcType=INTEGER},
+      taskNo = #{taskno,jdbcType=VARCHAR},
+      taskName = #{taskname,jdbcType=VARCHAR},
+      schedulerRule = #{schedulerrule,jdbcType=VARCHAR},
+      frozenStatus = #{frozenstatus,jdbcType=VARCHAR},
+      executorNo = #{executorno,jdbcType=VARCHAR},
+      frozenTime = #{frozentime,jdbcType=BIGINT},
+      unfrozenTime = #{unfrozentime,jdbcType=BIGINT},
+      createTime = #{createtime,jdbcType=BIGINT},
+      lastModifyTime = #{lastmodifytime,jdbcType=BIGINT},
+      sendType = #{sendtype,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      executeParamter = #{executeparamter,jdbcType=VARCHAR},
+      timeKey = #{timekey,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectList" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from quartz_task_informations
+        <if test="taskNo != null">
+            <where>
+                taskNo = #{taskNo}
+            </where>
+        </if>
+        order by id desc limit #{startIndex},10;
+    </select>
+
+    <select id="selectByTaskNo" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(*) from quartz_task_informations where taskNo=#{taskNo}
+  </select>
+
+    <select id="getTaskByTaskNo" parameterType="java.lang.String"
+            resultType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations">
+        select
+        <include refid="Base_Column_List"/>
+        from quartz_task_informations where taskNo = #{taskNo}
+    </select>
+
+    <select id="getUnfrozenTasks" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from quartz_task_informations where frozenStatus = #{frozenStatus}
+    </select>
+
+</mapper>

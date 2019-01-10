@@ -1,0 +1,52 @@
+# mybatis
+mybatis:
+  type-aliases-package: com.quartz.cn.springbootquartzdemo.bean
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+  mapper-locations: classpath:mapper/*.xml
+
+spring:
+  datasource:
+    url: jdbc:mysql://10.200.20.194:3306/quartz?useUnicode=true&characterEncoding=utf-8
+    username: pp_activity
+    password: aAh!jqAw^jASFerqj
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 1000
+    initialSize: 100
+    maxWait: 60000
+    minIdle: 500
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  kafka:
+    bootstrap-servers: 193.112.131.83:9092
+    consumer:
+      group-id: quartzdemo
+      auto-offset-reset: earliest
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+    enabled: true
+    encoding: UTF-8
+    mode: HTML
+#logging:
+#  level:
+#    root:
+#      info
+
+#logging:
+#  level:
+#    com.quartz.cn.springbootquartzdemo.dao:
+#      debug
+
+

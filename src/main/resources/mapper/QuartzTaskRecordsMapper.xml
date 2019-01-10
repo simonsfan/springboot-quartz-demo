@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quartz.cn.springbootquartzdemo.dao.QuartzTaskRecordsMapper">
+    <resultMap id="BaseResultMap" type="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskRecords">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="taskNo" property="taskno" jdbcType="VARCHAR"/>
+        <result column="timeKeyValue" property="timekeyvalue" jdbcType="VARCHAR"/>
+        <result column="executeTime" property="executetime" jdbcType="BIGINT"/>
+        <result column="taskStatus" property="taskstatus" jdbcType="VARCHAR"/>
+        <result column="failcount" property="failcount" jdbcType="INTEGER"/>
+        <result column="failReason" property="failreason" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createtime" jdbcType="BIGINT"/>
+        <result column="lastModifyTime" property="lastmodifytime" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, taskNo, timeKeyValue, executeTime, taskStatus, failcount, failReason, createTime, 
+    lastModifyTime
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from quartz_task_records
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from quartz_task_records
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskRecords">
+    insert into quartz_task_records (taskNo, timeKeyValue,
+      executeTime, taskStatus, failcount, 
+      failReason, createTime, lastModifyTime
+      )
+    values (#{taskno,jdbcType=VARCHAR}, #{timekeyvalue,jdbcType=VARCHAR},
+      #{executetime,jdbcType=BIGINT}, #{taskstatus,jdbcType=VARCHAR}, #{failcount,jdbcType=INTEGER}, 
+      #{failreason,jdbcType=VARCHAR}, #{createtime,jdbcType=BIGINT}, #{lastmodifytime,jdbcType=BIGINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskRecords">
+        insert into quartz_task_records
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="taskno != null">
+                taskNo,
+            </if>
+            <if test="timekeyvalue != null">
+                timeKeyValue,
+            </if>
+            <if test="executetime != null">
+                executeTime,
+            </if>
+            <if test="taskstatus != null">
+                taskStatus,
+            </if>
+            <if test="failcount != null">
+                failcount,
+            </if>
+            <if test="failreason != null">
+                failReason,
+            </if>
+            <if test="createtime != null">
+                createTime,
+            </if>
+            <if test="lastmodifytime != null">
+                lastModifyTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="taskno != null">
+                #{taskno,jdbcType=VARCHAR},
+            </if>
+            <if test="timekeyvalue != null">
+                #{timekeyvalue,jdbcType=VARCHAR},
+            </if>
+            <if test="executetime != null">
+                #{executetime,jdbcType=BIGINT},
+            </if>
+            <if test="taskstatus != null">
+                #{taskstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="failcount != null">
+                #{failcount,jdbcType=INTEGER},
+            </if>
+            <if test="failreason != null">
+                #{failreason,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifytime != null">
+                #{lastmodifytime,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskRecords">
+        update quartz_task_records
+        <set>
+            <if test="taskno != null">
+                taskNo = #{taskno,jdbcType=VARCHAR},
+            </if>
+            <if test="timekeyvalue != null">
+                timeKeyValue = #{timekeyvalue,jdbcType=VARCHAR},
+            </if>
+            <if test="executetime != null">
+                executeTime = #{executetime,jdbcType=BIGINT},
+            </if>
+            <if test="taskstatus != null">
+                taskStatus = #{taskstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="failcount != null">
+                failcount = #{failcount,jdbcType=INTEGER},
+            </if>
+            <if test="failreason != null">
+                failReason = #{failreason,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createTime = #{createtime,jdbcType=BIGINT},
+            </if>
+            <if test="lastmodifytime != null">
+                lastModifyTime = #{lastmodifytime,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.quartz.cn.springbootquartzdemo.bean.QuartzTaskRecords">
+    update quartz_task_records
+    set taskNo = #{taskno,jdbcType=VARCHAR},
+      timeKeyValue = #{timekeyvalue,jdbcType=VARCHAR},
+      executeTime = #{executetime,jdbcType=BIGINT},
+      taskStatus = #{taskstatus,jdbcType=VARCHAR},
+      failcount = #{failcount,jdbcType=INTEGER},
+      failReason = #{failreason,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=BIGINT},
+      lastModifyTime = #{lastmodifytime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="getTaskRecordsByTaskNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from quartz_task_records where taskNo = #{taskNo} order by createTime desc;
+    </select>
+</mapper>

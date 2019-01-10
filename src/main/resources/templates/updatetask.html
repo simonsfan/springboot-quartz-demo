@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>定时任务修改</title>
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mediaelementplayer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/red.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-line-icons.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="col-md-12 top-20 padding-0">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="panel-heading">
+                    <h4>修改定时任务项</h4>
+                </div>
+                <div class="col-md-6" style="padding-left:10px;">
+                    <form action="/quartz/edit/task" method="post">
+                        <input type="hidden" th:value="${taskInformation.id}" name="id" id="id"/>
+                        <input type="hidden" th:value="${taskInformation.version}" name="version" id="version"/>
+                        <input type="hidden" th:value="${taskInformation.createtime}" name="createtime"
+                               id="createtime"/>
+                        <input type="hidden" th:value="${taskInformation.lastmodifytime}" name="lastmodifytime"
+                               id="lastmodifytime"/>
+                        <input type="hidden" th:value="${taskInformation.frozentime}" name="frozentime"
+                               id="frozentime"/>
+                        <input type="hidden" th:value="${taskInformation.unfrozentime}" name="unfrozentime"
+                               id="unfrozentime"/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">任务编号:</label>
+                            <div class="col-sm-10"><input type="text" th:value="${taskInformation.taskno}" name="taskno"
+                                                          id="taskno" class="form-control">
+                            </div>
+                        </div>
+                        <br/> <br/> <br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">任务名称:</label>
+                            <div class="col-sm-10"><input type="text" th:value="${taskInformation.taskname}"
+                                                          name="taskname" id="taskname"
+                                                          class="form-control"></div>
+                        </div>
+                        <br/> <br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">定时配置规则:</label>
+                            <div class="col-sm-10"><input type="text" placeholder="(例如: * /5 * * * * ? 每5秒执行一次)"
+                                                          name="schedulerrule"
+                                                          th:value="${taskInformation.schedulerrule}" id="schedulerrule"
+                                                          class="form-control">
+                            </div>
+                        </div>
+                        <br/> <br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">冻结状态:</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="frozenstatus">
+                                    <option th:value="FROZEN" th:selected="${taskInformation.frozenstatus == 'FROZEN'}">
+                                        冻结
+                                    </option>
+                                    <option th:value="UNFROZEN"
+                                            th:selected="${taskInformation.frozenstatus == 'UNFROZEN'}">解冻
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <br/> <br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">执行方:</label>
+                            <div class="col-sm-10"><input type="text" th:value="${taskInformation.executorno}"
+                                                          name="executorno" id="executorno"
+                                                          class="form-control"></div>
+                        </div>
+                        <br/> <br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">执行方式:</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="sendtype">
+                                    <option th:value="http" th:selected="${taskInformation.sendtype == 'http'}">http
+                                    </option>
+                                    <option th:value="kafka" th:selected="${taskInformation.sendtype == 'kafka'}">
+                                        kafka
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <br/> <br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">url:</label>
+                            <div class="col-sm-10"><input type="text" name="url" th:value="${taskInformation.url}"
+                                                          id="url" class="form-control"></div>
+                        </div>
+                        <br/> <br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">执行参数:</label>
+                            <div class="col-sm-10"><input type="text" name="executeparamter"
+                                                          th:value="${taskInformation.executeparamter}"
+                                                          id="executeparamter"
+                                                          class="form-control"></div>
+                        </div>
+                        <br/><br/>
+                        <div class="form-group"><label class="col-sm-2 control-label text-right">timeKey:</label>
+                            <div class="col-sm-10"><input type="text" placeholder="(例如: yyyy-MM-dd HH:mm:ss)"
+                                                          name="timekey" th:value="${taskInformation.timekey}"
+                                                          id="timekey" class="form-control"></div>
+                        </div>
+                        <br/> <br/><br/>
+                        <input type="button" class="btn btn-3d btn-danger" th:onclick="'history.go(-1);'" align="left"
+                               style="float:left;margin-left:700px;" value="关闭"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" class="btn  btn-3d btn-success" id="updatetask" align="right" value="保存"/>
+                    </form>
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+
+    $(function () {
+        $("#updatetask").on('click', function (e) {
+            var taskno = $("#taskno").val();
+            var taskname = $("#taskname").val();
+            var schedulerrule = $("#schedulerrule").val();
+            var frozenstatus = $("#frozenstatus").val();
+            var executorno = $("#executorno").val();
+            var sendtype = $("#sendtype").val();
+            var url = $("#url").val();
+            var executeparamter = $("#executeparamter").val();
+            var timekey = $("#timekey").val();
+            var id = $("#id").val();
+            var version = $("#version").val();
+            var createtime = $("#createtime").val();
+            var lastmodifytime = $("#lastmodifytime").val();
+            var frozentime = $("#frozentime").val();
+            var unfrozentime = $("#unfrozentime").val();
+            $.ajax({
+                url: "/quartz/edit/task",
+                dataType: "json",
+                type: "POST",
+                data: {
+                    "taskno": taskno,
+                    "taskname": taskname,
+                    "schedulerrule": schedulerrule,
+                    "frozenstatus": frozenstatus,
+                    "executorno": executorno,
+                    "sendtype": sendtype,
+                    "url": url,
+                    "executeparamter": executeparamter,
+                    "timekey": timekey,
+                    "id": id,
+                    "version": version,
+                    "createtime": createtime,
+                    "lastmodifytime": lastmodifytime,
+                    "frozentime": frozentime,
+                    "unfrozentime": unfrozentime
+                },
+                success: function (result) {
+                    if (result.code == 200) {
+                        alert("更新成功!");
+                        location.href = "/";
+                    } else if (result.code == 1002) {
+                        alert("更新失败!");
+                    }
+                    else {
+                        alert("system error");
+                    }
+                }
+            })
+        });
+    });
+</script>
+</body>
+</html>

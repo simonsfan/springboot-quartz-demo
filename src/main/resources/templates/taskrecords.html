@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>定时任务执行详情页面</title>
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mediaelementplayer.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/red.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/simple-line-icons.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="col-md-12 top-20 padding-0">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body">
+                <h2>定时任务执行情况</h2>
+                <hr/>
+                <div class="responsive-table">
+                    <table class="table table-striped table-bordered" width="100%" cellspacing="0"  style="text-align:center;vertical-align:middle;">
+                        <thead>
+                        <tr>
+                            <th style="text-align:center;vertical-align:middle;">任务编号</th>
+                            <th style="text-align:center;vertical-align:middle;">timeKeyValue</th>
+                            <th style="text-align:center;vertical-align:middle;">执行时间</th>
+                            <th style="text-align:center;vertical-align:middle;">执行时长(毫秒)</th>
+                            <th style="text-align:center;vertical-align:middle;">执行状态</th>
+                            <th style="text-align:center;vertical-align:middle;">失败数</th>
+                            <th style="text-align:center;vertical-align:middle;">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="task:${quartzTaskRecords}">
+                            <td th:text="${task.taskno}" />
+                            <td th:text="${task.timekeyvalue}"/>
+                            <td th:text="${#dates.format(task.executetime,'yyyy-MM-dd HH:mm:ss')}"/>
+                            <td th:text="${task.time}"/>
+                            <td>
+                                <span th:if="${task.taskstatus eq 'SUCCESS'}" style="color:lawngreen">成功</span>
+                                <span th:if="${task.taskstatus eq 'INIT'}">初始化</span>
+                                <span th:if="${task.taskstatus eq 'FAIL'}" style="color:red;">失败</span>
+                            </td>
+                            <td th:text="${task.failcount}"/>
+                            <td >
+                                <span th:if="${task.taskstatus eq 'FAIL'} or ${task.taskstatus eq 'INIT'}" >
+                                     <input type="button" class="btn btn-3d btn-danger" th:onclick="'javascript:detailTaskErrors('+${task.id}+')'" value="查看"/>
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6" style="padding-top:20px;">
+                    showing <span style="color: red;" th:text="${size}"/> items
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+
+        function detailTaskErrors(recordId) {
+            location.href="/quartz/task/errors?recordid="+recordId;
+        }
+
+</script>
+</body>
+</html>
