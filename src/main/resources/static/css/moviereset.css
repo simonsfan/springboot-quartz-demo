@@ -1,0 +1,77 @@
+/*******reset**********/
+@charset "UTF-8";
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+{margin:0; padding:0; border:0; font:inherit; font-size:100%; vertical-align: baseline;}
+body{background:#FFF;}
+body,button,input,select,textarea{font: 12px/1.5 "Microsoft Yahei",tahoma,arial,"Hiragino Sans GB";-webkit-font-smoothing: antialiased}
+button,input,optgroup,select,textarea{font-family: sans-serif;font-size: 100%;margin: 0;}
+button,input,select,textarea{font-size:100%; outline: none;text-transform: none;}
+textarea{resize:none; overflow:auto;}
+ul,ol,li{list-style:none;}
+h1,h2,h3,h4,h5,h6{font-size: 100%;}
+table{border-collapse: collapse; border-spacing: 0;}
+caption,th,td{font-weight: normal; vertical-align: middle;}
+q,blockquote{quotes: none;}
+fieldset,img{border: 0;}
+address,caption,cite,code,dfn,em,strong,th,b,var{font-weight: normal;font-style: normal;}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display: block;}
+em,i,b{font-style:normal; font-weight: 400;}
+a{text-decoration:none; cursor:pointer;}
+a:link,a:visited,a:hover{text-decoration:none; outline:none;}
+a:hover{color:#009BFF;}
+figcaption,figure,main{display: block;}
+figure{margin: 1em 40px;}
+hr{box-sizing: content-box;height: 0;overflow: visible;}
+pre{font-family: monospace,monospace;font-size: 1em;}
+abbr[title]{border-bottom: none;text-decoration: underline;}
+b,strong{font-weight: inherit;}
+code,kbd,samp{font-family: monospace,monospace;font-size: 1em;}
+dfn{font-style: italic;}
+mark{background-color: #ff0;color: #000;}
+small{font-size: 80%;}
+audio,video{display: inline-block;}
+audio:not([controls]){display: none;height: 0;}
+img{border-style:none;}
+svg:not(:root){overflow: hidden;}
+button,html [type="button"],[type="reset"],[type="submit"]{-webkit-appearance:button;}
+button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner{border-style: none;padding: 0;}
+button:-moz-focusring,[type="button"]:-moz-focusring,[type="reset"]:-moz-focusring,[type="submit"]:-moz-focusring{outline: 1px dotted ButtonText;}
+legend{color: inherit;display: table;max-width: 100%;padding: 0;white-space: normal;}/* box-sizing: border-box; */
+progress{display: inline-block;vertical-align: baseline;}
+[type="checkbox"],[type="radio"]{padding: 0;}/* box-sizing:border-box;*/
+[type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button{height: auto;}
+[type="search"]{-webkit-appearance: textfield;outline-offset: -2px;}
+[type="search"]::-webkit-search-cancel-button,[type="search"]::-webkit-search-decoration{-webkit-appearance: none;}
+::-webkit-file-upload-button{-webkit-appearance: button;font: inherit;}
+details,menu{display: block;}
+summary{display: list-item;}
+canvas{display: inline-block;}
+template{display: none;}
+[hidden]{display: none;}
+.fl{float: left!important;}
+.fr{float: right!important;}
+.txt-left,.tl{text-align: left;}
+.txt-right,.tr{text-align: right;}
+.txt-center,.tc{text-align: center;}
+.hide{display:none!important;}
+.ellipsis{white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}
+.clearfix{zoom:1}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;overflow:hidden}
+*:focus{
+  outline: none;
+}
+/* 视频角标公用 */
+.superscript{display:block; width:30px; height:16px; background:url("imgs/icons.png") no-repeat 100px 0;}
+.superscript.lg{ background-position: -370px -187px;}/* 蓝光 */
+.superscript.sb{ background-position: -370px -204px;}/* 首播 */
+.superscript.zb{ background-position: -370px -136px;}/* 直播 */
+.superscript.zx{ background-position: -370px -119px;}/* 最新 */
+.superscript.dj{ background-position: -370px -102px;}/* 独家 */
+.superscript.db{ background-position: -370px -85px;}/* 独播 */
+.superscript.cq{ background-position: -370px -68px;}/* 超清 */
+.superscript.vip{ background-position: -370px -51px;}/* vip */
+.superscript.vip-q{ background-position: -353px -34px; width:47px;}/* vip 用券 */
+.superscript.vip-mf{ background-position: -352px -17px; width:48px;}/* vip 免费 */
+.superscript.vip-ty{ background-position: -347px 0; width:53px;}/* vip 体育 */
+.superscript.super-ff{ background-position: -370px -170px;}/* 超级vip 付费 */
+.superscript.vip-ff{ background-position: -370px -153px;}/* vip 付费 */
