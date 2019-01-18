@@ -2,7 +2,9 @@ package com.quartz.cn.springbootquartzdemo.service.quartz.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quartz.cn.springbootquartzdemo.bean.MovieIndex;
 import com.quartz.cn.springbootquartzdemo.bean.MovieSearch;
+import com.quartz.cn.springbootquartzdemo.dao.MovieIndexMapper;
 import com.quartz.cn.springbootquartzdemo.service.quartz.MovieSearchService;
 import com.quartz.cn.springbootquartzdemo.util.ResultUtil;
 import com.quartz.cn.springbootquartzdemo.vo.MovieIndexTemplate;
@@ -58,6 +60,78 @@ public class MovieSearchServiceImpl implements MovieSearchService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private MovieIndexMapper movieIndexMapper;
+
+    /**
+     * 复合查询
+     *
+     * @param search
+     * @return
+     */
+    @Override
+    public List<MovieIndex> searchMovie(MovieSearch search) {
+        List<MovieIndex> movieVoList = new ArrayList<>();
+        //如果搜索条件为空 默认进mysql查询
+        if (StringUtils.isEmpty(search.getKeyword()) && StringUtils.isEmpty(search.getArea()) && StringUtils.isEmpty(search.getLabel()) && StringUtils.isEmpty(search.getRelease())) {
+            List<MovieIndex> movieIndexList = movieIndexMapper.selectDefault();
+            return movieIndexList;
+        }
+        String label = search.getLabel();
+        String area = search.getArea();
+        String release = search.getRelease();
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        if (StringUtils.isNotEmpty(label) && !StringUtils.equals("*", label)) {
+            boolQueryBuilder.filter(QueryBuilders.termQuery(MovieSearch.LABEL, label));
+        }
+        if (StringUtils.isNotEmpty(area) && !StringUtils.equals("*", area)) {
+            boolQueryBuilder.filter(QueryBuilders.termQuery(MovieSearch.AREA, area));
+        }
+      /*  if (score > 0) {
+            RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery(MovieSearch.SCORE);
+            rangeQueryBuilder.gte(score);
+            boolQueryBuilder.filter(rangeQueryBuilder);
+        }*/
+        if (StringUtils.isNotEmpty(release) && !StringUtils.equals("*", release)) {
+            boolQueryBuilder.filter(QueryBuilders.termQuery(MovieSearch.RELEASE, release));
+        }
+
+        if(StringUtils.isNotEmpty(search.getKeyword())){
+        boolQueryBuilder.must(QueryBuilders.multiMatchQuery(search.getKeyword(),
+                MovieSearch.NAME,
+                MovieSearch.ACTORS,
+                MovieSearch.ALIAS,
+                MovieSearch.DIRECTORS,
+                MovieSearch.INTRODUCTION,
+                MovieSearch.AREA));
+        }
+
+        String[] includes = {MovieSearch.ID};
+
+        SearchRequestBuilder searchRequestBuilder = this.transportClient
+                .prepareSearch(INDEX)
+                .setTypes(TYPE)
+                .setQuery(boolQueryBuilder)
+                .addSort(MovieSearch.RELEASE, SortOrder.DESC).
+                        setFrom(0).
+                        setSize(10).
+                        setFetchSource(includes, null);
+
+        SearchResponse searchResponse = searchRequestBuilder.get();
+        if (searchResponse.status() != RestStatus.OK) {
+            return movieVoList;
+        }
+        SearchHits hits = searchResponse.getHits();
+        for (SearchHit hit : hits) {
+            String id = (String) hit.getSource().get(MovieSearch.ID);
+            MovieIndex movieIndex = movieIndexMapper.selectByPrimaryKey(Long.parseLong(id));
+            movieVoList.add(movieIndex);
+        }
+        return movieVoList;
+    }
+
+
     /**
      * 新增文档
      *
@@ -102,6 +176,7 @@ public class MovieSearchServiceImpl implements MovieSearchService {
         for (MultiGetItemResponse getItemResponse : multiGetItemResponse) {
             GetResponse response = getItemResponse.getResponse();
             String json = response.getSourceAsString();
+
         }
     }
 
@@ -162,84 +237,6 @@ public class MovieSearchServiceImpl implements MovieSearchService {
         RestStatus status = bulkItemResponses.status();
         logger.info("bulk option result status={}", status);
     }
-
-
-    /**
-     * 复合查询
-     *
-     * @param search
-     * @return
-     */
-    @Override
-    public List<MovieVo> searchMovie(MovieSearch search) {
-        List<MovieVo> movieVoList = new ArrayList<>();
-        if (search == null) {
-            return movieVoList;
-        }
-        String label = search.getLabel();
-        String area = search.getArea();
-        float score = search.getScore();
-        String release = search.getRelease();
-
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        if (StringUtils.isNotEmpty(label) && !StringUtils.equals("*", label)) {
-            boolQueryBuilder.filter(QueryBuilders.termQuery(MovieSearch.LABEL, label));
-        }
-        if (StringUtils.isNotEmpty(area) && !StringUtils.equals("*", area)) {
-            boolQueryBuilder.filter(QueryBuilders.termQuery(MovieSearch.AREA, area));
-        }
-        if (score > 0) {
-            RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery(MovieSearch.SCORE);
-            rangeQueryBuilder.gte(score);
-            boolQueryBuilder.filter(rangeQueryBuilder);
-        }
-        if (StringUtils.isNotEmpty(release) && !StringUtils.equals("*", release)) {
-            boolQueryBuilder.filter(QueryBuilders.termQuery(MovieSearch.RELEASE, release));
-        }
-
-        boolQueryBuilder.must(QueryBuilders.multiMatchQuery(search.getKeyword(),
-                MovieSearch.NAME,
-                MovieSearch.ACTORS,
-                MovieSearch.ALIAS,
-                MovieSearch.DIRECTORS,
-                MovieSearch.INTRODUCTION,
-                MovieSearch.AREA));
-
-        String[] includes = {MovieSearch.NAME, MovieSearch.ALIAS, MovieSearch.SCORE, MovieSearch.ACTORS, MovieSearch.DIRECTORS, MovieSearch.INTRODUCTION};
-
-        SearchRequestBuilder searchRequestBuilder = this.transportClient
-                .prepareSearch(INDEX)
-                .setTypes(TYPE)
-                .setQuery(boolQueryBuilder)
-                .addSort(MovieSearch.RELEASE, SortOrder.DESC).
-                        setFrom(0).
-                        setSize(10).
-                        setFetchSource(includes, null);
-
-        SearchResponse searchResponse = searchRequestBuilder.get();
-        if (searchResponse.status() != RestStatus.OK) {
-            logger.error("");
-            return movieVoList;
-        }
-        SearchHits hits = searchResponse.getHits();
-        MovieVo movieVo = new MovieVo();
-        for (SearchHit hit : hits) {
-            String movieName = (String) hit.getSource().get(MovieSearch.NAME);
-            String movieAlias = (String) hit.getSource().get(MovieSearch.ALIAS);
-            String movieActors = (String) hit.getSource().get(MovieSearch.ACTORS);
-            String movieDirectors = (String) hit.getSource().get(MovieSearch.DIRECTORS);
-            String movieIntroduction = (String) hit.getSource().get(MovieSearch.INTRODUCTION);
-            movieVo.setName(movieName);
-            movieVo.setAlias(movieAlias);
-            movieVo.setActors(movieActors);
-            movieVo.setDirectors(movieDirectors);
-            movieVo.setIntroduction(movieIntroduction);
-            movieVoList.add(movieVo);
-        }
-        logger.info("");
-        return movieVoList;
-    }
-
 
     public void queryDsl() {
         //Match Query

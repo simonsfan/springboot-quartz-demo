@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.quartz.cn.springbootquartzdemo.dao.MovieIndexMapper">
+    <resultMap id="BaseResultMap" type="com.quartz.cn.springbootquartzdemo.bean.MovieIndex">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="alias" property="alias" jdbcType="VARCHAR"/>
+        <result column="actors" property="actors" jdbcType="VARCHAR"/>
+        <result column="directors" property="directors" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="REAL"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="picurl" property="picurl" jdbcType="VARCHAR"/>
+        <result column="label" property="label" jdbcType="VARCHAR"/>
+        <result column="release_date" property="releaseDate" jdbcType="VARCHAR"/>
+        <result column="introduction" property="introduction" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, alias, actors, directors, score, area, picurl, label, release_date, introduction
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from movie_index
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from movie_index
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.quartz.cn.springbootquartzdemo.bean.MovieIndex">
+    insert into movie_index (id, name, alias, 
+      actors, directors, score, 
+      area, picurl, label, 
+      release_date, introduction)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{alias,jdbcType=VARCHAR}, 
+      #{actors,jdbcType=VARCHAR}, #{directors,jdbcType=VARCHAR}, #{score,jdbcType=REAL}, 
+      #{area,jdbcType=VARCHAR}, #{picurl,jdbcType=VARCHAR}, #{label,jdbcType=VARCHAR}, 
+      #{releaseDate,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.quartz.cn.springbootquartzdemo.bean.MovieIndex">
+        insert into movie_index
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="alias != null">
+                alias,
+            </if>
+            <if test="actors != null">
+                actors,
+            </if>
+            <if test="directors != null">
+                directors,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="picurl != null">
+                picurl,
+            </if>
+            <if test="label != null">
+                label,
+            </if>
+            <if test="releaseDate != null">
+                release_date,
+            </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="alias != null">
+                #{alias,jdbcType=VARCHAR},
+            </if>
+            <if test="actors != null">
+                #{actors,jdbcType=VARCHAR},
+            </if>
+            <if test="directors != null">
+                #{directors,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=REAL},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="picurl != null">
+                #{picurl,jdbcType=VARCHAR},
+            </if>
+            <if test="label != null">
+                #{label,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.quartz.cn.springbootquartzdemo.bean.MovieIndex">
+        update movie_index
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="alias != null">
+                alias = #{alias,jdbcType=VARCHAR},
+            </if>
+            <if test="actors != null">
+                actors = #{actors,jdbcType=VARCHAR},
+            </if>
+            <if test="directors != null">
+                directors = #{directors,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=REAL},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="picurl != null">
+                picurl = #{picurl,jdbcType=VARCHAR},
+            </if>
+            <if test="label != null">
+                label = #{label,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                release_date = #{releaseDate,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.quartz.cn.springbootquartzdemo.bean.MovieIndex">
+    update movie_index
+    set name = #{name,jdbcType=VARCHAR},
+      alias = #{alias,jdbcType=VARCHAR},
+      actors = #{actors,jdbcType=VARCHAR},
+      directors = #{directors,jdbcType=VARCHAR},
+      score = #{score,jdbcType=REAL},
+      area = #{area,jdbcType=VARCHAR},
+      picurl = #{picurl,jdbcType=VARCHAR},
+      label = #{label,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectDefault" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from movie_index order by score desc
+    </select>
+</mapper>

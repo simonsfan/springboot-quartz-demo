@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>es搜索视频页</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/list.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/moviereset.css}"/>
+</head>
+
+<body class=" grid-1410">
+<div class="main">
+    <div class="navBox">
+        <nav>
+            <div class="filter">
+                <ul class="filter_detail clearfix">
+
+                    <li class="filter_detail_row">
+                        <label for="">分类</label>
+                        <ul class="filter_detail_column clearfix">
+                            <li class="selectAll cur" name="cataid=211280">
+                            <a href="" onclick="searchmovie('label','*');">全部</a></li>
+
+                            <li data-filter="cataid=211280" class="">
+                                <a href=""
+                                   name="
+                                00030002_typeid_1_cataid_211280
+                            ">院线</a>
+                            </li>
+
+                            <li data-filter="cataid=100" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_100
+                            ">动作</a>
+                            </li>
+
+                            <li data-filter="cataid=124" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_124
+                            ">喜剧</a>
+                            </li>
+
+                            <li data-filter="cataid=101" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_101
+                            ">爱情</a>
+                            </li>
+
+                            <li data-filter="cataid=104" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_104
+                            ">科幻</a>
+                            </li>
+
+                            <li data-filter="cataid=102" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_102
+                            ">灾难</a>
+                            </li>
+
+                            <li data-filter="cataid=103" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_103
+                            ">恐怖</a>
+                            </li>
+
+                            <li data-filter="cataid=125" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_125
+                            ">悬疑</a>
+                            </li>
+
+                            <li data-filter="cataid=126" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_126
+                            ">魔幻</a>
+                            </li>
+
+                            <li data-filter="cataid=127" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_127
+                            ">战争</a>
+                            </li>
+
+                            <li data-filter="cataid=128" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_128
+                            ">犯罪</a>
+                            </li>
+
+                            <li data-filter="cataid=129" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_129">惊悚</a>
+                            </li>
+
+                            <li data-filter="cataid=130" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_130">动画</a>
+                            </li>
+
+                            <li data-filter="cataid=131" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_131">冒险</a>
+                            </li>
+
+                            <li data-filter="cataid=132" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_132
+                            ">青春</a>
+                            </li>
+
+                            <li data-filter="cataid=133" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_133
+                            ">剧情</a>
+                            </li>
+
+                            <li data-filter="cataid=134" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_134
+                            ">文艺</a>
+                            </li>
+
+                            <li data-filter="cataid=135" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_135
+                            ">纪实</a>
+                            </li>
+
+                            <li data-filter="cataid=137" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_137
+                            ">预告</a>
+                            </li>
+
+                            <li data-filter="cataid=75261" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_75261
+                            ">明星</a>
+                            </li>
+
+                            <li data-filter="cataid=75281" class="">
+                                <a href="" name="
+                                00030002_typeid_1_cataid_75281
+                            ">微电影</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="filter_detail_row">
+                        <label for="">地区</label>
+                        <ul class="filter_detail_column clearfix">
+                            <li class="selectAll" name="area=内地">
+                                <a href="http://localhost:8080/search?area=*"
+                                   name="00030002_typeid_1_all">全部</a></li>
+
+                            <li data-filter="area=内地" class="">
+                                <a href=""  onclick="searchmovie('area','内地');" name="
+                                00030002_typeid_1_area_5">内地</a>
+                            </li>
+
+                            <li data-filter="area=香港" class="">
+                                <a href="" name="
+                                00030002_typeid_1_area_6">香港</a>
+                            </li>
+
+                            <li data-filter="area=韩国" class="">
+                                <a href=""
+                                   name="00030002_typeid_1_area_12">韩国</a>
+                            </li>
+
+                            <li data-filter="area=美国" class="cur">
+                                <a href=""
+                                   name="00030002_typeid_1_area_4">美国</a>
+                            </li>
+
+                            <li data-filter="area=英国" class="">
+                                <a href="" name="
+                                00030002_typeid_1_area_10
+                            ">英国</a>
+                            </li>
+
+                            <li data-filter="area=日本" class="">
+                                <a href="" name="
+                                00030002_typeid_1_area_9
+                            ">日本</a>
+                            </li>
+
+                            <li data-filter="area=-1" class="">
+                                <a href=""
+                                   name="00030002_typeid_1_area_0">其他</a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="filter_detail_row">
+                        <label for="">年份</label>
+                        <ul class="filter_detail_column clearfix">
+                            <li class="selectAll cur" name="year=2019">
+                                <a href="http://localhost:8080/search?release"
+                                   name="00030002_typeid_1_all">全部</a></li>
+
+                            <li data-filter="year=2019" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2019
+                            ">2019</a>
+                            </li>
+
+                            <li data-filter="year=2018" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2018
+                            ">2018</a>
+                            </li>
+
+                            <li data-filter="year=2017" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2017
+                            ">2017</a>
+                            </li>
+
+                            <li data-filter="year=2016" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2016
+                            ">2016</a>
+                            </li>
+
+                            <li data-filter="year=2015" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2015
+                            ">2015</a>
+                            </li>
+
+                            <li data-filter="year=2014" class="">
+                                <a href="" name="00030002_typeid_1_year_2014">2014</a>
+                            </li>
+
+                            <li data-filter="year=2013" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2013">2013</a>
+                            </li>
+
+                            <li data-filter="year=2012" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2012
+                            ">2012</a>
+                            </li>
+
+                            <li data-filter="year=2011" class="">
+                                <a href="" name=" 00030002_typeid_1_year_2011
+                            ">2011</a>
+                            </li>
+
+                            <li data-filter="year=2010" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2010
+                            ">2010</a>
+                            </li>
+
+                            <li data-filter="year=2009" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2009
+                            ">2009</a>
+                            </li>
+
+                            <li data-filter="year=2008" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_2008
+                            ">2008</a>
+                            </li>
+
+                            <li data-filter="year=-1" class="">
+                                <a href="" name="
+                                00030002_typeid_1_year_-1
+                            ">其他</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div class="tab">
+        <ul class="clearfix">
+            <li class="tabBtn  " path-name="hot" id="hot" name="00030003_2">最热</li>
+            <li class="tabBtn cur" path-name="time" id="time" name="00030003_3">最新</li>
+            <li class="tabBtn " path-name="score" id="score" name="00030003_1">好评</li>
+        </ul>
+    </div>
+
+    <div class="listContent" id="listContent">
+        <ul class="clearfix">
+
+            <li class="content" id="8092952"  th:each="movie:${movieIndices}">
+                <div class="contentBox">
+                    <i class="superscript-ita">
+                        <em class="blueDisk"></em>
+                    </i>
+                        <img th:src="${movie.picurl}" alt="">
+                    <i class="boxshadow"></i>
+                    <div class="introduction">
+                        <p class="title clearfix" title="">
+                            <span class="titleDetail">[[${movie.name}]]</span>
+                            <span class="score">
+                            <i>[[${movie.score}]]</i>
+                        </span>
+                        </p>
+                        <div class="message">
+                            <p class="actress clearfix"><label for="">主演：</label><span>[[${movie.actors}]]</span></p>
+                            <p class="playback clearfix"><!--<i class="icon"></i>-->
+                                年份: [[${movie.releaseDate}]]
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="pagination">
+        <ul class="clearfix">
+            <li class="previous disabled"><a href="javascript:void(0)">上一页</a></li>
+            <li class="pages cur" page-number="pn=1"><a href="javascript:void(0)" name="00030007_pn_1">1</a></li>
+            <li class="pages " page-number="pn=2"><a href="javascript:void(0)" name="00030007_pn_2">2</a></li>
+            <li class="pages " page-number="pn=3"><a href="javascript:void(0)" name="00030007_pn_3">3</a></li>
+            <li class="pages " page-number="pn=4"><a href="javascript:void(0)" name="00030007_pn_4">4</a></li>
+            <li class="pages " page-number="pn=5"><a href="javascript:void(0)" name="00030007_pn_5">5</a></li>
+            <li class="pages " page-number="pn=6"><a href="javascript:void(0)" name="00030007_pn_6">6</a></li>
+            <li class="pages " page-number="pn=7"><a href="javascript:void(0)" name="00030007_pn_7">7</a></li>
+            <li class=" ellipsis"><a href="javascript:void(0)">···</a></li>
+            <li class="pages" page-number="pn=30"><a href="javascript:void(0)" name="00030007_pn_30">30</a></li>
+            <li class="next "><a href="javascript:void(0)">下一页</a></li>
+        </ul>
+    </div>
+</div>
+
+<style>
+    div.g_copyright.g_miniFooter ul, .grid-1010 div.g_copyright.g_miniFooter ul {
+        width: 650px;
+        height: 50px;
+        margin: 0 auto;
+        line-height: 40px;
+        display: block;
+        text-align: center;
+    }
+
+    .grid-1230 div.g_copyright.g_miniFooter ul, .grid-1410 div.g_copyright.g_miniFooter ul, .grid-1170 div.g_copyright.g_miniFooter ul, .grid-1380 div.g_copyright.g_miniFooter ul {
+        width: 810px;
+    }
+
+    div.g_copyright.g_miniFooter ul li {
+        width: 60px;
+        text-align: center;
+        display: inline-block;
+        margin: 0 0 0 0px;
+        float: left;
+    }
+
+    div.g_copyright.g_miniFooter p {
+        width: 600px;
+        margin: 0 auto;
+        height: 30px;
+        line-height: 20px;
+        text-align: center;
+        color: #999999;
+    }
+
+    div.g_copyright.g_miniFooter p a {
+        color: #999999;
+    }
+
+    div.g_copyright.g_miniFooter p a:hover {
+        color: #666666;
+    }
+
+    div.g_copyright.g_miniFooter ul li a:hover {
+        color: #666666;
+    }
+
+    div.g_copyright.g_miniFooter ul li a {
+        color: #343434;
+    }
+
+    div.g_copyright.g_miniFooter {
+        margin: 0 auto;
+        text-align: center;
+        border-top: none;
+        border-bottom: none;
+        background: none;
+        padding: 0;
+        line-height: normal;
+        color: #666666;
+    }
+
+    div.footerin {
+        width: 100%;
+        border-top: solid 0px #ccc;
+    }
+</style>
+<script type='text/javascript'>
+    function searchmovie(key,value) {
+
+    }
+
+</script>
+<div class="footerin">
+    <div class="g_copyright g_miniFooter ">
+        <ul class="txt_list">
+            <li><a title="关于我们" href="" rel="nofollow" target="_blank">关于我们</a></li>
+            <li><a title="公司新闻" href="" rel="nofollow" target="_blank">公司新闻</a></li>
+            <li><a title="合作伙伴" href="" rel="nofollow" target="_blank">合作伙伴</a>
+            </li>
+            <li><a title="广告业务" href="" rel="nofollow" target="_blank">广告业务</a></li>
+            <li><a title="诚聘英才" href="" rel="nofollow" target="_blank">诚聘英才</a></li>
+            <li><a title="校园招聘" href="" rel="nofollow" target="_blank">校园招聘</a></li>
+            <li><a title="郑重声明" href="" rel="nofollow" target="_blank">郑重声明</a></li>
+            <li><a title="联系我们" href="" rel="nofollow" target="_blank">联系我们</a></li>
+            <li><a title="微博微信" href="" rel="nofollow" target="_blank">微博微信</a>
+            </li>
+        </ul>
+        <p>Copyright © 2007-2019 <a href="" rel="nofollow" target="_blank">×××技术有限公司</a> All Rights Reserved.</p>
+    </div>
+</div>
+</body>
+</html>

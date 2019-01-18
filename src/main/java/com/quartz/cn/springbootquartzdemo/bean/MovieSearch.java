@@ -12,6 +12,7 @@ import java.util.Date;
 public class MovieSearch {
 
     public static final String NAME = "name";
+    public static final String ID = "id";
     public static final String ALIAS = "alias";
     public static final String ACTORS = "actors";
     public static final String DIRECTORS = "directors";
@@ -20,6 +21,7 @@ public class MovieSearch {
     public static final String SCORE = "score";
     public static final String RELEASE = "release";
     public static final String AREA = "area";
+    public static final String PICURL = "picurl";
 
     private String actors;
     private String alias;
@@ -30,6 +32,7 @@ public class MovieSearch {
     private float score;
     private String release;
     private String area;
+    private String picUrl;
 
     private String keyword;
 
@@ -113,4 +116,11 @@ public class MovieSearch {
         this.keyword = keyword;
     }
 
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
 }

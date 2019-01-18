@@ -1,9 +1,9 @@
 package com.quartz.cn.springbootquartzdemo.service.quartz;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.quartz.cn.springbootquartzdemo.bean.MovieIndex;
 import com.quartz.cn.springbootquartzdemo.bean.MovieSearch;
 import com.quartz.cn.springbootquartzdemo.vo.MovieIndexTemplate;
-import com.quartz.cn.springbootquartzdemo.vo.MovieVo;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface MovieSearchService {
 
-    List<MovieVo> searchMovie(MovieSearch search);
+    List<MovieIndex> searchMovie(MovieSearch search);
     String addIndex(MovieIndexTemplate indexTemplate);
     String getIndex(String id);
     String deleteIndex(String id);

@@ -1,13 +1,11 @@
 package com.quartz.cn.springbootquartzdemo.controller;
 
+import com.quartz.cn.springbootquartzdemo.bean.MovieIndex;
 import com.quartz.cn.springbootquartzdemo.bean.MovieSearch;
 import com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations;
 import com.quartz.cn.springbootquartzdemo.service.quartz.MovieSearchService;
 import com.quartz.cn.springbootquartzdemo.service.quartz.QuartzService;
 import com.quartz.cn.springbootquartzdemo.util.Page;
-import com.quartz.cn.springbootquartzdemo.util.ResultUtil;
-import com.quartz.cn.springbootquartzdemo.vo.MovieVo;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -54,29 +51,26 @@ public class IndexController {
         return "/index";
     }
 
-    @ResponseBody
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String searchEs(@RequestParam(value = "keyword", required = false) String keyWord,
+    public String searchEs(Model model,
+                           @RequestParam(value = "keyword", required = false) String keyword,
                            @RequestParam(value = "label", required = false) String label,
                            @RequestParam(value = "area", required = false) String area,
-                           @RequestParam(value = "score", required = false) String score,
                            @RequestParam(value = "release", required = false) String release) {
         logger.info("");
         MovieSearch movieSearch = new MovieSearch();
         try {
-            movieSearch.setKeyword(keyWord);
+            movieSearch.setKeyword(keyword);
             movieSearch.setArea(area);
             movieSearch.setRelease(release);
             movieSearch.setLabel(label);
-            if (StringUtils.isNotEmpty(score)) {
-                movieSearch.setScore(Float.parseFloat(score));
-            }
-            List<MovieVo> movieVoList = movieSearchService.searchMovie(movieSearch);
-            return ResultUtil.success(movieVoList);
+            List<MovieIndex> movieIndices = movieSearchService.searchMovie(movieSearch);
+            model.addAttribute("movieIndices", movieIndices);
         } catch (Exception e) {
-            logger.error("es查询发生异常exceptions-->" + e.toString());
-            return ResultUtil.fail();
+            logger.error("es查询发生异常exceptions={}", e.toString());
+            return "/error";
         }
+        return "/movie";
     }
 
 

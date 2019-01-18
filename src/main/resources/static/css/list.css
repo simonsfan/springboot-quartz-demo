@@ -1,0 +1,150 @@
+@-webkit-keyframes content_hover{
+    0%{opacity:0; -webkit-transform:translateZ(0) scale(.9322)}
+    50%{opacity:1}
+    100%{opacity:1; -webkit-transform:translateZ(0) scale(1)}}
+@keyframes content_hover{
+    0%{opacity:0;transform:translateZ(0) scale(.9322)}
+    50%{opacity:1}
+    100%{opacity:1;transform:translateZ(0) scale(1)}}
+.clearfix{ zoom:1}
+.clearfix:after{ content:"."; display:block; height:0; clear:both; visibility:hidden; overflow:hidden}
+.main .navBox{ width:100%; background-color:#F8F8F8; border-bottom:1px solid #ebebeb; border-top:1px solid #ebebeb}
+.main nav{ width:1190px; margin:10px auto 0 auto; padding:15px 0 10px 0}
+.grid-1010 .main nav{ width:990px}
+.grid-1410 .main nav{ width:1390px}
+.main nav .navList li{ float:left; padding:0 12px; line-height:28px; font-size:16px; margin:5px 5px 0 0}
+.main nav .navList li a{ color:#4A4A4A}
+.main nav .navList li:hover a{ color:#009BFF}
+.main nav .navList li.cur{ border-radius:14px; background-color:#656C80; color:#fff}
+.main nav .navList li.cur a{ color:#fff; display:inline-block; width:100%; height:100%}
+.main nav .filter{ background-color:#fff; box-shadow:0 2px 4px 0 rgba(0, 0, 0, .1); width:1190px; margin:10px auto; border-top:1px solid #009BFF; position:relative}
+.grid-1010 .main nav .filter{ width:990px}
+.grid-1410 .main nav .filter{ width:1390px}
+.main nav .filter .filter_detail{ padding:1px 14px 16px; font-size:12px}
+.main nav .filter .filter_detail .filter_detail_row .filter_detail_column{ padding-left:38px}
+.main nav .filter .filter_detail .filter_detail_row{ margin-top:15px}
+.main nav .filter .filter_detail .filter_detail_row label{ float:left; margin-right:14px; line-height:24px}
+.main nav .filter .filter_detail .filter_detail_row li{ float:left; padding:0 10px; line-height:24px; margin-right:4px}
+.main nav .filter .filter_detail .filter_detail_row li.cur{ border-radius:12px; background-color:#656C80}
+.main nav .filter .filter_detail .filter_detail_row li.cur a{ color:#fff}
+.main nav .filter .filter_detail .filter_detail_row li a{ color:#323232}
+.main nav .filter .filter_detail .filter_detail_row li:hover a{ color:#009BFF}
+.main nav .filter .filter_detail .filter_detail_row li.cur:hover a{ color:#FFF}
+.main .tab{ width:1190px; margin:0 auto}
+.grid-1010 .main .tab{ width:990px}
+.grid-1410 .main .tab{ width:1390px}
+.main .tab ul{ padding:20px 0}
+.main .tab li{ float:left; font-size:14px; height:14px; line-height:14px; color:#969696; margin-right:32px; cursor:pointer}
+.main .tab li:hover{color:#009BFF; }
+.main .tab li a:hover{ color:#009BFF}
+.main .tab li.cur{ color:#009BFF; font-weight:700; position:relative}
+.main .tab li.cur:hover{ color:#009BFF}
+.main .tab li.cur::before{ content:""; position:absolute; top:25px; left:50%; margin-left:-9px; width:18px; height:3px; background-color:#009BFF; border-radius:2px}
+.listContent{ width:1190px; overflow:hidden; padding:12px 30px 10px 30px; margin:0 auto}
+.listContent ul{ width:1210px}
+.grid-1010 .listContent{ width:990px}
+.grid-1010 .listContent ul{ width:1010px}
+.grid-1410 .listContent{ width:1390px}
+.grid-1410 .listContent ul{ width:1411px}
+.listContent .content{ float:left; width:182px; height:310px; margin-bottom:30px; margin-right:19.5px; position:relative}
+.grid-1410 .listContent .content{ width:214px; height:350px}
+.listContent .content .contentBox{ top:0; overflow:hidden; width:182px; height:310px; transition:.5s top; position:absolute}
+.listContent .content .coverContentBox{ display:none; position:absolute; left:0; top:0; opacity:0; width:180px; height:240px; user-select:none; visibility:hidden; box-shadow:0 2px 18px rgba(0,0,0,.35); -webkit-transition:opacity .1s ease,transform .1s ease; transition:opacity .1s ease,transform .1s ease; }
+.listContent .content:hover .coverContentBox{ border:1px solid #ebebeb; display:block; will-change:opacity; visibility:visible; opacity:1; width:224px; height:296px; background:#fff; position:absolute; top:-7px; left:-21px; z-index:1; opacity:1; -webkit-animation:content_hover .2s ease backwards; animation:content_hover .2s ease backwards; }
+:root .listContent .content:hover .coverContentBox{ border:none}
+.grid-1410 .listContent .content:hover .coverContentBox{ width:258px; height:338px; left:-22px; top:-7px}
+.listContent .content:hover .coverContentBox img{ display:block; width:224px; height:296px; background: no-repeat center}
+.grid-1410 .listContent .content:hover .coverContentBox img{ width:258px; height:338px; display:block; background: no-repeat center}
+.listContent .content:hover .coverContentBox .infomation{ width:204px; height:136px; padding:0 10px; position:absolute; left:0; top:160px; background:#fff; overflow:hidden}
+.listContent .content:hover .coverContentBox .infomation a{float:left; }
+.listContent .content:hover .coverContentBox .infomation .title{ line-height:50px; cursor:pointer; float:left; width:100%; }
+.listContent .content:hover .coverContentBox .infomation .message{float:left;}
+.listContent .content:hover .coverContentBox .infomation .title:hover .titleDetail{ color:#009BFF}
+.grid-1410 .listContent .content:hover .coverContentBox .infomation{ width:238px; height:169px; padding:0 10px; top:169px}
+.grid-1410 .listContent .content:hover .coverContentBox .infomation .titleDetail{ font-size:18px; line-height:50px; margin-top:8px; max-width:200px}
+.grid-1410 .listContent .content:hover .coverContentBox .infomation .score{ font-size:14px; line-height:50px; margin-top:8px}
+.grid-1410 .listContent .content:hover .coverContentBox .infomation .score i{ font-size:18px}
+.listContent .content:hover .coverContentBox .infomation .message p{ font-size:12px; color:#646464; line-height:16px}
+.listContent .content:hover .coverContentBox .infomation .message p.brief{ margin:5px 0 0 0}
+.listContent .content:hover .coverContentBox .infomation .message p label{ float:left; width:36px; line-height:16px}
+.listContent .content:hover .coverContentBox .infomation .message p span{ float:left; width:168px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+.grid-1410 .listContent .content:hover .coverContentBox .infomation .message p span{ width:198px}
+.listContent .content:hover .coverContentBox .infomation .message p.brief span{ overflow:hidden; white-space:normal; line-height:17px; height:34px; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical}
+.listContent .content:hover .coverContentBox .infomation .btn-sc,
+.listContent .content:hover .coverContentBox .infomation .downmload{ width:50%; height:36px; float:left; display:inline-block; cursor:pointer; margin:5px 0; position:relative}
+.grid-1410 .listContent .content:hover .coverContentBox .infomation .btn-sc,
+.grid-1410 .listContent .content:hover .coverContentBox .infomation .downmload{ margin:10px 0; position:relative}
+.listContent .content:hover .coverContentBox .infomation .btn-sc .sc{ width:16px; height:16px; position:absolute; margin:auto; left:0; top:0; right:0; bottom:0; background: no-repeat 0 -100px}
+.listContent .content:hover .coverContentBox .infomation .btn-sc .sc:hover{ background:url(../../imgs/icons.png) no-repeat -20px -100px}
+.listContent .content:hover .coverContentBox .infomation .btn-sc.on .sc{ background:url(../../imgs/icons.png) no-repeat -20px -100px}
+.listContent .content:hover .coverContentBox .infomation .downmload .dl{ width:16px; height:16px; position:absolute; margin:auto; left:0; top:0; right:0; bottom:0; background: no-repeat -40px -100px}
+.listContent .content:hover .coverContentBox .infomation .downmload .dl:hover{ background:url(../../imgs/icons.png) no-repeat -60px -100px}
+.listContent .content:hover .coverContentBox .infomation .downmload.cantdownload .dl,
+.listContent .content:hover .coverContentBox .infomation .downmload.cantdownload:hover .dl{ background:url(../../imgs/icons.png) no-repeat -80px -100px}
+.listContent .content:hover .coverContentBox .infomation .shotline{ width:1px; height:12px; background:#d8d8d8; position:absolute; left:50%; bottom:15px}
+.grid-1410 .listContent .content:hover .coverContentBox .infomation .shotline{ bottom:20px}
+.listContent .content .contentBox .introduction{ height:70px}
+.grid-1410 .listContent .content .contentBox{ width:214px; height:350px}
+.listContent .content .contentBox .superscript{ width:auto; height:20px; line-height: 20px; border-radius: 3px;z-index: 1;overflow: hidden;padding: 0 5px; position:absolute; top:5px; left:5px;}
+.listContent .content .contentBox .superscript-ita{ width:auto; height:16px; position:absolute; top:0; right:0}
+.listContent .content .contentBox .boxshadow{ position:absolute; left:0; top:225px; width:100%; height:15px; background-image:linear-gradient(-180deg, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, .3) 100%)}
+.grid-1410 .listContent .content .contentBox .boxshadow{ top:265px}
+.listContent .content .contentBox .superscript .pay{ width:31px; height:16px; display:inline-block; background:url(../../imgs/icons.png) no-repeat -370px -170px}
+.listContent .content .contentBox .superscript .vipFree{ width:48px; height:16px; display:inline-block; background:url(../../imgs/icons.png) no-repeat -352px -17px}
+.listContent .content .contentBox .superscript .vipTicket{ width:47px; height:16px; display:inline-block; background:url(../../imgs/icons.png) no-repeat -353px -34px}
+.listContent .content .contentBox .superscript-ita .blueDisk{ width:48px; height:48px; display:inline-block; background:url(../../../images/covermask.png) no-repeat -96px 0px}
+.listContent .content .contentBox .video {color: #fae406;background: #dd322e;}
+.listContent .content .contentBox .sport {color: #ffd088;background: #4c4c4c;}
+.listContent .content img{ display:block; width:182px; height:240px; background:url(../../imgs/empty.png) no-repeat center}
+.grid-1410 .listContent .content img{ width:214px; height:280px}
+.listContent .content P{ line-height:34px; font-size:14px; color:#323232}
+.listContent .content P .titleDetail{ max-width:150px; margin-top:4px; line-height:32px; font-size:16px; font-weight:700; color:#323232; float:left; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+.listContent .content P .score{ float:right; font-size:14px; color:#ffb300; line-height:30px; margin-top:4px}
+.listContent .content P span i{ font-style:normal; font-size:18px}
+.listContent .introduction .message p{ width:100%; padding:0; height:14px; font-size:12px; line-height:13px; margin-bottom:6px; color:#646464}
+.listContent .introduction .message .playback{ line-height:14px; margin-bottom:0}
+.listContent .introduction .message .playback .icon{ width:14px; height:14px; float:left; margin-right:8px; background:url(../../imgs/icons.png) no-repeat -100px -100px}
+.listContent .introduction .message .actress, .listContent .introduction .message .diredtor{ overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+.listContent .introduction .message p label{ float:left; width:36px}
+.listContent .introduction .message p span{ float:left; width:146px; display:inline-block; font-size:12px; color:#646464; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
+.grid-1410 .listContent .introduction .message p span{ width:178px}
+.listContent .introduction .message .actress{ color:#323232}
+.shotVideo{ width:1190px; overflow:hidden; padding:0 10px 10px 10px; margin:0 auto}
+.shotVideo ul{ width:1210px}
+.grid-1010 .shotVideo{ width:990px}
+.grid-1010 .shotVideo ul{ width:1010px}
+.grid-1410 .shotVideo{ width:1390px}
+.grid-1410 .shotVideo ul{ width:1411px}
+.shotVideo .shotVideo_content{ float:left; margin-top:20px; width:182px; height:137px; margin-right:19.5px; position:relative}
+.grid-1410 .shotVideo .shotVideo_content{ width:214px; height:155px}
+.grid-1410 .shotVideo .shotVideo_content img{ width:214px; height:121px}
+.shotVideo .shotVideo_content .blueDisk{ position:absolute; width:48px; height:48px; top:0; right:0; background:url(../../../images/covermask.png) no-repeat -96px 0px}
+.shotVideo .shotVideo_content a{width: 100%; position:relative; display:inline-block}
+.shotVideo .shotVideo_content a:hover .coverBox{ width:100%; height:100%; position:absolute; left:0; top:0; background-color:#000; opacity:.3}
+.shotVideo .shotVideo_content .boxShow{position:absolute; width:100%; height:28px; left:0; bottom:0; background-image:linear-gradient(-180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.70) 100%); }
+.shotVideo .shotVideo_content img{ margin:auto; max-width:182px; height:103px; display:block; background:url(../../imgs/empty.png) no-repeat center}
+.shotVideo .shotVideo_content em{ position:absolute; left:8px; bottom:6px; color:#fff; font-size:12px; line-height:12px; z-index:1; }
+.shotVideo .shotVideo_content .linkto{ display:block; line-height:34px; font-size:14px; color:#323232; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; cursor:pointer}
+.shotVideo .shotVideo_content .linkto:hover{ color:#009BFF}
+.pagination{ margin:30px auto; text-align:center}
+.pagination ul{ display:inline-block}
+.pagination li{ float:left}
+.pagination li.previous{ margin-right:15px}
+.pagination li.next{ margin-left:15px}
+.pagination li.next, .pagination li.previous{ width:64px; height:32px; background-color:#fff; border:1px solid #eee; border-radius:2px}
+.pagination li.next:hover, .pagination li.previous:hover{ width:64px; height:32px; background-color:#fff; border:1px solid #009BFF; color:#009bff; border-radius:2px}
+.pagination li.next a, .pagination li.previous a{ color:#646464}
+.pagination li.next:hover a, .pagination li.previous:hover a{ color:#009BFF}
+.pagination li.next.disabled, .pagination li.previous.disabled{ border:1px solid #eee; color:#009bff}
+.pagination li.next.disabled:hover a, .pagination li.previous.disabled:hover a{ color:#969696}
+.pagination li.disabled a{ color:#969696; cursor:default}
+.pagination li.pages{ min-width:22px; height:32px; background-color:#fff; border:1px solid #eee; border-radius:2px; margin:0 5px; padding:0 5px; }
+.pagination li.pages:hover{ border:1px solid #009BFF}
+.pagination li.pages:hover a{ color:#009BFF}
+.pagination li.ellipsis{ width:32px; height:32px; background-color:#fff; border:1px solid #eee; border-radius:2px; margin:0 5px}
+.pagination li.pages.cur{ background-color:#009BFF; border:1px solid #009BFF}
+.pagination li.pages.cur a{ color:#fff}
+.pagination li a{ display:inline-block; width:100%; height:100%; text-align:center; line-height:32px; font-size:14px; color:#646464}
+.pagination li.next a.disabled, .pagination li.previous a.disabled{ color:#969696}
+.noresult{ text-align:center; padding:100px 0 300px 0; border-bottom:1px solid #ebebeb; background:#fff}
+.noresult p{ font-size:16px; color:#000}

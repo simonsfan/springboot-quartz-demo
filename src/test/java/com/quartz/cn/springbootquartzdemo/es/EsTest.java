@@ -67,7 +67,6 @@ public class EsTest extends SpringbootQuartzDemoApplicationTests {
 
         String id = "UDHaWmgBBHn7EfncqRNC";
         movieSearchService.buldOption(indexTemplate,id);
-
     }
 
 
