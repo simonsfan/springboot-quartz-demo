@@ -1,7 +1,7 @@
 package com.quartz.cn.springbootquartzdemo.controller;
 
-import com.quartz.cn.springbootquartzdemo.bean.MovieIndex;
 import com.quartz.cn.springbootquartzdemo.bean.MovieSearch;
+import com.quartz.cn.springbootquartzdemo.bean.MovieIndex;
 import com.quartz.cn.springbootquartzdemo.bean.QuartzTaskInformations;
 import com.quartz.cn.springbootquartzdemo.service.quartz.MovieSearchService;
 import com.quartz.cn.springbootquartzdemo.service.quartz.QuartzService;

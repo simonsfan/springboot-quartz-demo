@@ -28,7 +28,7 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
   kafka:
-    bootstrap-servers: 193.112.131.83:9092
+    bootstrap-servers: 10.200.20.194:9092
     consumer:
       group-id: quartzdemo
       auto-offset-reset: earliest

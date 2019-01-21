@@ -1,7 +1,5 @@
 package com.quartz.cn.springbootquartzdemo.bean;
 
-import java.util.Date;
-
 /**
  * @ClassName MovieSearch
  * @Description TODO
