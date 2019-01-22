@@ -31,13 +31,18 @@ import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.sort.SortOrder;
+import org.elasticsearch.search.suggest.Suggest;
+import org.elasticsearch.search.suggest.SuggestBuilder;
+import org.elasticsearch.search.suggest.SuggestBuilders;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestion;
+import org.elasticsearch.search.suggest.completion.CompletionSuggestionBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.expression.Lists;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @ClassName MovieSearchServiceImpl
@@ -62,6 +67,61 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 
     @Autowired
     private MovieIndexMapper movieIndexMapper;
+
+
+    /**
+     * 自动补全逻辑，注意索引中suggest字段类型要设置为 completion
+     *
+     * @param prefix
+     * @return
+     */
+    public List<String> suggest(String prefix) {
+        //suggest是字段名称，返回匹配的5条
+        CompletionSuggestionBuilder suggestion = SuggestBuilders.completionSuggestion("suggest").prefix(prefix).size(5);
+
+        SuggestBuilder suggestBuilder = new SuggestBuilder();
+        suggestBuilder.addSuggestion("autocomplete", suggestion);
+
+        SearchRequestBuilder requestBuilder = this.transportClient.prepareSearch(INDEX)
+                .setTypes(TYPE)
+                .suggest(suggestBuilder);
+        logger.debug(requestBuilder.toString());
+
+        SearchResponse response = requestBuilder.get();
+        Suggest suggest = response.getSuggest();
+        if (suggest == null) {
+            return new ArrayList<>();
+        }
+        Suggest.Suggestion result = suggest.getSuggestion("autocomplete");
+
+        int maxSuggest = 0;
+        Set<String> suggestSet = new HashSet<>();
+
+        for (Object term : result.getEntries()) {
+            if (term instanceof CompletionSuggestion.Entry) {
+                CompletionSuggestion.Entry item = (CompletionSuggestion.Entry) term;
+
+                if (item.getOptions().isEmpty()) {
+                    continue;
+                }
+
+                for (CompletionSuggestion.Entry.Option option : item.getOptions()) {
+                    String tip = option.getText().string();
+                    if (suggestSet.contains(tip)) {
+                        continue;
+                    }
+                    suggestSet.add(tip);
+                    maxSuggest++;
+                }
+            }
+
+            if (maxSuggest > 5) {
+                break;
+            }
+        }
+        List<String> suggests = Arrays.asList(suggestSet.toArray(new String[]{}));
+        return suggests;
+    }
 
     /**
      * 复合查询
