@@ -32,7 +32,7 @@
         <nav>
             <div class="filter">
                 <ul class="filter_detail clearfix">
-                    <li class="filter_detail_row">
+                    <li class="filter_detail_row" id="form-label">
                         <label for="">分类</label>
                         <ul class="filter_detail_column clearfix">
                             <li class="selectAll cur" name="cataid=211280">
@@ -164,7 +164,7 @@
                         </ul>
                     </li>
 
-                    <li class="filter_detail_row">
+                    <li class="filter_detail_row" id="form-area">
                         <label for="">地区</label>
                         <ul class="filter_detail_column clearfix">
                             <li class="selectAll" name="area=内地">
@@ -210,7 +210,7 @@
                         </ul>
                     </li>
 
-                    <li class="filter_detail_row">
+                    <li class="filter_detail_row" id="form-release">
                         <label for="">年份</label>
                         <ul class="filter_detail_column clearfix">
                             <li class="selectAll cur" name="year=2019">
@@ -434,9 +434,53 @@
 </div>
 </body>
 <script type="text/javascript">
-    function searchkw() {
-        var keyword = $("#keyword").val();
-        location.href = "/search?keyword=" + keyword;
+
+    function handleGetParams(targetParams) {
+        let params = {}
+        let urlParamsStr = location.search.slice(1).split('&')
+        let urlArray = urlParamsStr.forEach(e => {
+            if(!e) {
+            return
+        }
+
+        let [k,y] = e.split('=')
+        params[k] = y
+    })
+        params = Object.assign(params, targetParams)
+        window.location.href = window.location.pathname + '?' + o2u(params)
     }
+
+    function o2u(o) {
+        let url = ''
+        for (let key in o) {
+            url += `&${key}=${o[key]}`
+        }
+        return url.slice(1)
+    }
+
+    $('#form-label a,#form-release a,#form-area a').click(function(e) {
+        e.preventDefault()
+    })
+
+    $('#form-label a').click(function() {
+        handleGetParams({
+            label: $(this).text().trim()
+        })
+    })
+    $('#form-release a').click(function() {
+        handleGetParams({
+            release: $(this).text().trim()
+        })
+    })
+    $('#form-area a').click(function() {
+        handleGetParams({
+            area: $(this).text().trim()
+        })
+    })
+
+
+    // label 分类
+    // release 年
+    // area 地区
 </script>
 </html>
